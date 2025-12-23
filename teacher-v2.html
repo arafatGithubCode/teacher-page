@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+
+    <style>
+      :root {
+        --primary-glow: #6aa9ff;
+        --secondary-glow: #00ffff;
+        --glass-bg: rgba(23, 35, 58, 0.65);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --text-gradient: linear-gradient(90deg, #ffffff, #9ec5ff);
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #000307;
+        overflow-x: hidden;
+      }
+
+      /* Background & Animations */
+      .teachers-wrapper {
+        position: relative;
+        background: #000307;
+        overflow: hidden;
+      }
+
+      .teachers-bg {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+            circle at 20% 20%,
+            rgba(78, 120, 255, 0.15),
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 70%,
+            rgba(0, 255, 255, 0.1),
+            transparent 50%
+          );
+        animation: pulseGlow 10s infinite alternate;
+        z-index: 0;
+      }
+
+      @keyframes pulseGlow {
+        from {
+          opacity: 0.6;
+          transform: scale(1);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1.05);
+        }
+      }
+
+      .line-dec {
+        margin: 0 auto;
+        width: 100px;
+        height: 4px;
+        background: var(--primary-glow);
+        border-radius: 2px;
+        box-shadow: 0 0 15px var(--primary-glow);
+      }
+
+      /* Feature Row Styling */
+      .feature-row {
+        position: relative;
+        z-index: 1;
+        padding: 60px 0;
+      }
+
+      /* Text Column Styling */
+      .teacher-step-content {
+        padding: 20px;
+        text-align: left;
+        color: #fff;
+      }
+
+      .step-number {
+        display: inline-block;
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--primary-glow);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        background: rgba(106, 169, 255, 0.1);
+        padding: 5px 12px;
+        border-radius: 20px;
+        border: 1px solid rgba(106, 169, 255, 0.2);
+      }
+
+      .teacher-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        background: var(--text-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .teacher-desc {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        opacity: 0.8;
+        margin-bottom: 30px;
+        color: #e0e0e0;
+      }
+
+      .btn-outline-light {
+        border-color: #ff5722;
+        color: #ff5722;
+        transition: all 0.3s ease;
+      }
+
+      .btn-outline-light:hover {
+        background-color: #ff5722;
+        border-color: #ff5722;
+        color: #fff;
+      }
+
+      /* Icon styling within text */
+      .icon-circle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        margin-bottom: 20px;
+        color: var(--primary-glow);
+        font-size: 1.25rem;
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 0 15px rgba(106, 169, 255, 0.1);
+      }
+
+      /* Graphics / Image Placeholder Styling */
+      .feature-image-wrapper {
+        position: relative;
+        padding: 10px;
+        transition: transform 0.5s ease;
+      }
+
+      .feature-image-wrapper:hover {
+        transform: translateY(-5px);
+      }
+
+      .feature-image-box {
+        position: relative;
+        border-radius: 16px;
+        overflow: hidden;
+        /* Glass Effect on Image Container */
+        background: var(--glass-bg);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.6),
+          0 0 0 1px rgba(255, 255, 255, 0.05);
+      }
+
+      .feature-image-box img {
+        width: 100%;
+        height: auto;
+        display: block;
+        opacity: 0.9;
+        transition: opacity 0.3s;
+      }
+
+      .feature-image-box:hover img {
+        opacity: 1;
+      }
+
+      /* Glow effect behind image */
+      .img-glow {
+        position: absolute;
+        width: 80%;
+        height: 80%;
+        background: var(--primary-glow);
+        filter: blur(80px);
+        opacity: 0.15;
+        top: 10%;
+        left: 10%;
+        z-index: -1;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .feature-row {
+          text-align: center;
+          padding: 40px 0;
+        }
+        .teacher-step-content {
+          text-align: center;
+          padding: 0 0 40px 0;
+        }
+      }
+
+      /* Mobile App CTA Section */
+      .mobile-app-cta {
+        background: #000307;
+        padding: 80px 0;
+        border-top: 1px solid var(--glass-border, rgba(255, 255, 255, 0.1));
+        overflow: hidden;
+      }
+
+      .mobile-app-image {
+        max-width: 100%;
+        max-height: 550px;
+        transform: rotate(-5deg);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6));
+      }
+
+      .mobile-app-image:hover {
+        transform: rotate(0deg) scale(1.05);
+      }
+
+      .mobile-app-cta .google-play,
+      .mobile-app-cta .app-store {
+        min-width: 150px;
+        max-width: 200px;
+        object-fit: fill;
+      }
+
+      .mobile-app-cta .google-play img,
+      .mobile-app-cta .app-store img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .mobile-app-cta .google-play:hover,
+      .mobile-app-cta .app-store:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease;
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 991px) {
+        .mobile-app-cta {
+          text-align: center;
+        }
+
+        .mobile-app-cta .d-flex {
+          justify-content: center !important;
+        }
+
+        .mobile-app-image {
+          margin-top: 50px;
+          transform: rotate(0deg);
+          max-height: 350px;
+        }
+      }
+
+      /* WRAPPER FOR EACH STEP */
+      .step-wrapper {
+        position: relative;
+        padding: 80px 0; /* Vertical breathing room */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Subtle separator */
+        background-color: #000307; /* Base dark color */
+        overflow: hidden;
+      }
+
+      /* PATTERN 1: DOT MATRIX (Subtle tech dots) */
+      .bg-pattern-dots {
+        background-image: radial-gradient(
+          rgba(106, 169, 255, 0.15) 1px,
+          transparent 1px
+        );
+        background-size: 30px 30px;
+      }
+
+      /* PATTERN 2: GRAPH PAPER (The Grid) */
+      .bg-pattern-grid {
+        background-image: linear-gradient(
+            rgba(255, 255, 255, 0.05) 1px,
+            transparent 1px
+          ),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        background-size: 40px 40px;
+      }
+
+      /* PATTERN 3: DIAGONAL STRIPES (Speed/Motion feel) */
+      .bg-pattern-diagonal {
+        background-image: repeating-linear-gradient(
+          45deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(255, 255, 255, 0.02) 1px,
+          transparent 1px,
+          transparent 15px
+        );
+      }
+
+      /* PATTERN 4: MICRO-CROSS (Precise engineering look) */
+      .bg-pattern-cross {
+        background-image: radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.08) 1.5px,
+            transparent 1.5px
+          ),
+          radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.08) 1.5px,
+            transparent 1.5px
+          );
+        background-position: 0 0, 20px 20px;
+        background-size: 40px 40px;
+      }
+
+      /* PATTERN 5: BLUEPRINT (Dashed grid) */
+      .bg-pattern-blueprint {
+        background-image: linear-gradient(
+            rgba(106, 169, 255, 0.05) 2px,
+            transparent 2px
+          ),
+          linear-gradient(90deg, rgba(106, 169, 255, 0.05) 2px, transparent 2px),
+          linear-gradient(rgba(106, 169, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(106, 169, 255, 0.03) 1px, transparent 1px);
+        background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+        background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+      }
+
+      /* CAROUSEL STYLING (Kept from previous) */
+      .feature-carousel .carousel-caption {
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(4px);
+        border-radius: 50px;
+        padding: 5px 20px;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: auto;
+        white-space: nowrap;
+      }
+      .feature-carousel .carousel-indicators {
+        margin-bottom: 0.5rem;
+      }
+      .feature-carousel .carousel-control-prev,
+      .feature-carousel .carousel-control-next {
+        opacity: 0;
+        transition: opacity 0.3s;
+        width: 10%;
+      }
+      .feature-image-box:hover .carousel-control-prev,
+      .feature-image-box:hover .carousel-control-next {
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+  <body>
+    <section id="teachers-flow" class="teachers-wrapper">
+      <div class="container position-relative py-5">
+        <div
+          class="text-center text-white pb-2 pt-4 position-relative"
+          style="z-index: 2"
+        >
+          <h2 class="display-4 fw-bold mb-3">
+            <span style="color: var(--primary-glow)"
+              >Tools Built for Teachers</span
+            >
+          </h2>
+          <p class="fs-5 mb-4 text-light opacity-75 col-lg-8 mx-auto">
+            Experience a seamless grading workflow. Create assignments, collect
+            work, and return rich, AI-assisted feedback in minutes.
+          </p>
+          <div class="line-dec"></div>
+        </div>
+      </div>
+
+      <div class="step-wrapper bg-pattern-dots">
+        <div class="container">
+          <div class="row feature-row align-items-center">
+            <div class="col-lg-6 pe-lg-5">
+              <div class="teacher-step-content">
+                <span class="step-number">Step 01</span>
+                <div class="d-block">
+                  <div class="icon-circle">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                  </div>
+                </div>
+                <h3 class="teacher-title">Set Work Instantly</h3>
+                <p class="teacher-desc">
+                  Create comprehensive assignments with clear instructions,
+                  attached resources, and grading rubrics. Our AI helps
+                  structure your requirements to ensure students know exactly
+                  what to do.
+                </p>
+                <button class="btn btn-outline-light rounded-pill px-4">
+                  See Demo
+                </button>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="feature-image-wrapper">
+                <div class="img-glow"></div>
+                <div class="feature-image-box">
+                  <img
+                    src="./images/teacher/set-work.png"
+                    alt="Set Work Interface"
+                    class="img-fluid"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-wrapper bg-pattern-grid">
+        <div class="container">
+          <div class="row feature-row align-items-center">
+            <div class="col-lg-6 order-lg-1 order-2">
+              <div class="feature-image-wrapper">
+                <div
+                  class="img-glow"
+                  style="background: var(--secondary-glow)"
+                ></div>
+
+                <div class="feature-image-box feature-carousel">
+                  <div
+                    id="submissionCarousel"
+                    class="carousel slide carousel-fade"
+                    data-bs-ride="carousel"
+                  >
+                    <div class="carousel-indicators">
+                      <button
+                        type="button"
+                        data-bs-target="#submissionCarousel"
+                        data-bs-slide-to="0"
+                        class="active"
+                      ></button>
+                      <button
+                        type="button"
+                        data-bs-target="#submissionCarousel"
+                        data-bs-slide-to="1"
+                      ></button>
+                      <button
+                        type="button"
+                        data-bs-target="#submissionCarousel"
+                        data-bs-slide-to="2"
+                      ></button>
+                    </div>
+                    <div class="carousel-inner">
+                      <div class="carousel-item active" data-bs-interval="3500">
+                        <img
+                          src="./images/teacher/gclass-room.png"
+                          class="d-block w-100"
+                          alt="Google Classroom"
+                        />
+                        <div class="carousel-caption">
+                          <small class="fw-bold"
+                            ><i class="fab fa-google me-2"></i>Google
+                            Classroom</small
+                          >
+                        </div>
+                      </div>
+                      <div class="carousel-item" data-bs-interval="3500">
+                        <img
+                          src="./images/teacher/app.png"
+                          class="d-block w-100"
+                          alt="Mobile App Upload"
+                        />
+                        <div class="carousel-caption">
+                          <small class="fw-bold"
+                            ><i class="fa-solid fa-mobile-screen me-2"></i
+                            >Mobile App</small
+                          >
+                        </div>
+                      </div>
+                      <div class="carousel-item" data-bs-interval="3500">
+                        <img
+                          src="./images/teacher/submit.png"
+                          class="d-block w-100"
+                          alt="Student Portal"
+                        />
+                        <div class="carousel-caption">
+                          <small class="fw-bold"
+                            ><i class="fa-solid fa-laptop me-2"></i>Student
+                            Portal</small
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <button
+                      class="carousel-control-prev"
+                      type="button"
+                      data-bs-target="#submissionCarousel"
+                      data-bs-slide="prev"
+                    >
+                      <span
+                        class="carousel-control-prev-icon"
+                        aria-hidden="true"
+                      ></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button
+                      class="carousel-control-next"
+                      type="button"
+                      data-bs-target="#submissionCarousel"
+                      data-bs-slide="next"
+                    >
+                      <span
+                        class="carousel-control-next-icon"
+                        aria-hidden="true"
+                      ></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 ps-lg-5 order-lg-2 order-1">
+              <div class="teacher-step-content">
+                <span
+                  class="step-number"
+                  style="
+                    color: var(--secondary-glow);
+                    border-color: rgba(0, 255, 255, 0.2);
+                  "
+                  >Step 02</span
+                >
+                <div class="d-block">
+                  <div class="icon-circle" style="color: var(--secondary-glow)">
+                    <i class="fa-solid fa-upload"></i>
+                  </div>
+                </div>
+                <h3 class="teacher-title">3 Ways to Submit</h3>
+                <p class="teacher-desc">
+                  We support flexible submission methods to suit any classroom
+                  environment. Students can hand in work via:
+                </p>
+                <ul class="list-unstyled text-light opacity-75">
+                  <li class="mb-2">
+                    <i class="fab fa-google text-info me-2"></i>
+                    <strong>Google Classroom</strong> Integration
+                  </li>
+                  <li class="mb-2">
+                    <i class="fa-solid fa-mobile-screen text-info me-2"></i>
+                    <strong>Mobile App</strong> (Scan physical paper)
+                  </li>
+                  <li class="mb-2">
+                    <i class="fa-solid fa-laptop text-info me-2"></i>
+                    <strong>Student Portal</strong> (File upload)
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-wrapper bg-pattern-diagonal">
+        <div class="container">
+          <div class="row feature-row align-items-center">
+            <div class="col-lg-6 pe-lg-5">
+              <div class="teacher-step-content">
+                <span class="step-number">Step 03</span>
+                <div class="d-block">
+                  <div class="icon-circle">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </div>
+                </div>
+                <h3 class="teacher-title">AI-Assisted Feedback</h3>
+                <p class="teacher-desc">
+                  Don't start from a blank page. Our AI analyzes the student's
+                  work against your rubric and suggests constructive feedback.
+                  Review, edit, and personalize it before sending.
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="feature-image-wrapper">
+                <div class="img-glow"></div>
+                <div class="feature-image-box">
+                  <img
+                    src="./images/teacher/feedback.png"
+                    alt="Feedback Editor"
+                    class="img-fluid"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-wrapper bg-pattern-cross">
+        <div class="container">
+          <div class="row feature-row align-items-center">
+            <div class="col-lg-6 order-lg-1 order-2">
+              <div class="feature-image-wrapper">
+                <div class="img-glow" style="background: #a29bfe"></div>
+                <div class="feature-image-box">
+                  <img
+                    src="./images/teacher/note.png"
+                    alt="Voice Note Interface"
+                    class="img-fluid"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 ps-lg-5 order-lg-2 order-1">
+              <div class="teacher-step-content">
+                <span
+                  class="step-number"
+                  style="color: #a29bfe; border-color: rgba(162, 155, 254, 0.2)"
+                  >Step 04</span
+                >
+                <div class="d-block">
+                  <div class="icon-circle" style="color: #a29bfe">
+                    <i class="fa-solid fa-microphone"></i>
+                  </div>
+                </div>
+                <h3 class="teacher-title">Personal Voice Notes</h3>
+                <p class="teacher-desc">
+                  Sometimes text isn't enough. Record quick, personal voice
+                  messages to explain complex concepts or offer encouragement.
+                  It adds a human touch to digital grading.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-wrapper bg-pattern-blueprint">
+        <div class="container">
+          <div class="row feature-row align-items-center">
+            <div class="col-lg-6 pe-lg-5">
+              <div class="teacher-step-content">
+                <span class="step-number">Step 05</span>
+                <div class="d-block">
+                  <div class="icon-circle">
+                    <i class="fa-solid fa-paper-plane"></i>
+                  </div>
+                </div>
+                <h3 class="teacher-title">Instant Returns</h3>
+                <p class="teacher-desc">
+                  With one click, return graded work to the entire class or
+                  specific students. Students receive notifications instantly
+                  and can view their feedback on any device.
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="feature-image-wrapper">
+                <div class="img-glow"></div>
+                <div class="feature-image-box">
+                  <img
+                    src="./images/teacher/return.png"
+                    alt="Return Work Interface"
+                    class="img-fluid"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
